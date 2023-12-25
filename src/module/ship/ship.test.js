@@ -9,15 +9,15 @@ test("check ship name", () => {
     expect(ship.name).toBe("carrier");
 });  
 
-test.skip("check ship length", () => {
+test("check ship length", () => {
     expect(ship.length).toBe(5);
 });  
 
-test.skip("check if the ship has been hit", () => {
+test("check if the ship has been hit", () => {
     expect(ship.hit()).toBe(true);
 });
 
-test.skip("check if the ship has not been sunk", () => {
+test("check if the ship has not been sunk", () => {
     expect(ship.isSunk()).not.toBe(true);
 });
 
@@ -32,7 +32,7 @@ describe("", () => {
         hitIt();
     });
 
-    test.skip("check if the ship has been sunk", () => {
+    test("check if the ship has been sunk", () => {
   
         expect(ship.isSunk()).toBe(true);
     });
