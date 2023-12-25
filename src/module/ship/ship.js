@@ -7,9 +7,16 @@ export default function CreateShip(name, length) {
         return true;
     };
 
+    const isSunk = () => {
+        if(health === length) return true;
+        
+        return false;
+    };
+
     return Object.freeze({
         get name() { return name },
         get length() { return length },
         hit,
+        isSunk
     });
 };
