@@ -20,6 +20,8 @@ const posAvailable = (ship, row, col, dir, board) => {
 export default function GameBoard() {
     const board = Array.from({length: 10}, () => Array(10).fill(false));
 
+    const shipAttacks = Array.from({length: 10}, () => Array(10).fill(false));
+
     const createShip = (name, length) => Ship(name, length); 
 
     const placeShip = (ship, row, col, dir) => {
@@ -40,9 +42,24 @@ export default function GameBoard() {
         return false
     };
 
+    const receivedAtk = (row, col) => {
+        if(shipAttacks[row][col] === true) return false;
+        if(board[row][col] === false && shipAttacks[row][col] === false) {
+            shipAttacks[row][col] = true;
+            return false;
+        };
+
+        board[row][col].hit()
+        shipAttacks[row][col] = true;
+
+        return true;
+    };
+
     return Object.freeze({
+        get board() { return board},
+        get shipAttacks() { return shipAttacks},
         createShip,
         placeShip,
-        get board() { return board},
+        receivedAtk
     });
 };
