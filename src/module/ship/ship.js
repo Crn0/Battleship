@@ -1,4 +1,4 @@
-export default function CreateShip(name, length) {
+export default function Ship(name, length) {
     let health = 0;
 
     const hit = () => {
@@ -17,6 +17,6 @@ export default function CreateShip(name, length) {
         get name() { return name },
         get length() { return length },
         hit,
-        isSunk
+        isSunk,
     });
 };
