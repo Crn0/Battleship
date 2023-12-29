@@ -5,7 +5,7 @@ const posAvailable = (ship, row, col, dir, board) => {
 
     for (let i = 0; i < ship.length; i += 1) {
         if(dir === "horizontal") {
-            array.push(board[row][col + 1]);
+            array.push(board[row][col + i]);
         };
 
         if(dir === "vertical") {
