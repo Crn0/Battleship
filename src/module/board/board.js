@@ -22,7 +22,15 @@ export default function GameBoard() {
 
     const shipAttacks = Array.from({length: 10}, () => Array(10).fill(false));
 
-    const createShip = (name, length) => Ship(name, length); 
+    const dock = [];
+
+    const createShip = (name, length) => {
+        const ship = Ship(name, length);
+
+        dock.push(ship)
+
+        return ship;
+    }; 
 
     const placeShip = (ship, row, col, dir) => {
         if(posAvailable(ship, row, col, dir, board)) {
@@ -58,8 +66,10 @@ export default function GameBoard() {
     return Object.freeze({
         get board() { return board},
         get shipAttacks() { return shipAttacks},
+        get dock() { return dock},
         createShip,
         placeShip,
-        receivedAtk
+        receivedAtk,
+       
     });
 };
