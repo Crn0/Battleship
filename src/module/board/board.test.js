@@ -11,6 +11,7 @@ let destroyer;
 
 beforeEach(() => {
     gameBoard = CreateBoard();
+
     carrier = gameBoard.createShip("carrier",5);
     battleship = gameBoard.createShip("battleship",4);
     cruiser = gameBoard.createShip("cruiser", 3);
@@ -42,13 +43,29 @@ describe("ship creation", () => {
 });
 
 describe("place ships", () => {
-    test("place the ship horizontally", () => {
-        expect(gameBoard.placeShip(carrier, 0, 0, "horizontal")).toBe(true);
-        
+    test("place carrier", () => {
+        expect(gameBoard.placeShip(carrier, 0, 0, "horizontal")).toBe(true); 
+        expect(gameBoard.board).toContain(carrier);
     });
 
-    test("place the ship vertically", () => {
+    test("place battleship", () => {
         expect(gameBoard.placeShip(battleship, 1, 0, "vertical")).toBe(true);
+        expect(gameBoard.board).toContain(battleship);
+    });
+
+    test("place cruiser", () => {
+        expect(gameBoard.placeShip(cruiser, 8, 0, "horizontal")).toBe(true);
+        expect(gameBoard.board).toContain(cruiser);
+    });
+
+    test("place submarine", () => {
+        expect(gameBoard.placeShip(submarine, 7, 0, "horizontal")).toBe(true);
+        expect(gameBoard.board).toContain(submarine);
+    });
+
+    test("place submarine", () => {
+        expect(gameBoard.placeShip(destroyer, 6, 0, "horizontal")).toBe(true);
+        expect(gameBoard.board).toContain(destroyer);
     });
     
     test("does not place ship if the position is occupied horizontally", () => {
@@ -66,7 +83,6 @@ describe("place ships", () => {
     test("does not work if the given position is out of the gameBoard", () => {
         expect(gameBoard.placeShip(carrier, 0, 10, "horizontal")).toBe(false);
     });
-    
 });
 
 // ship attack
@@ -74,7 +90,8 @@ describe("place ships", () => {
 describe("receive attack", () => {
     let place;
     beforeEach(() => {
-        place = gameBoard.placeShip(battleship, 0, 0, "horizontal")
+        place = gameBoard.placeShip(battleship, 0, 0, "horizontal");
+       
     });
   
     test("if the attack hit the ship return true", () => {
@@ -95,31 +112,78 @@ describe("receive attack", () => {
 
 // ship is all sunk
 
-describe.skip("all ships sunk", () => {
+describe("all ships sunk", () => {
     const attack = jest.fn(() => {
+        // carrier
         gameBoard.receivedAtk(0, 0);
         gameBoard.receivedAtk(0, 1);
         gameBoard.receivedAtk(0, 2);
         gameBoard.receivedAtk(0, 3);
         gameBoard.receivedAtk(0, 4);
+        // battleship
+        gameBoard.receivedAtk(1, 0);
+        gameBoard.receivedAtk(2, 0);
+        gameBoard.receivedAtk(3, 0);
+        gameBoard.receivedAtk(4, 0);
+        // cruiser
+        gameBoard.receivedAtk(8, 0);
+        gameBoard.receivedAtk(8, 1);
+        gameBoard.receivedAtk(8, 2);
+        // submarine
+        gameBoard.receivedAtk(7, 0);
+        gameBoard.receivedAtk(7, 1);
+        gameBoard.receivedAtk(7, 2);
+        // destroyer
+        gameBoard.receivedAtk(6, 0);
+        gameBoard.receivedAtk(6, 1);
+
+    });
+    const oneShipLeft = jest.fn(() => {
+        // carrier
+        gameBoard.receivedAtk(0, 0);
+        gameBoard.receivedAtk(0, 1);
+        gameBoard.receivedAtk(0, 2);
+        gameBoard.receivedAtk(0, 3);
+        gameBoard.receivedAtk(0, 4);
+        // battleship
+        gameBoard.receivedAtk(1, 0);
+        gameBoard.receivedAtk(2, 0);
+        gameBoard.receivedAtk(3, 0);
+        gameBoard.receivedAtk(4, 0);
+        // cruiser
+        gameBoard.receivedAtk(8, 0);
+        gameBoard.receivedAtk(8, 1);
+        gameBoard.receivedAtk(8, 2);
+        // submarine
+        gameBoard.receivedAtk(7, 0);
+        gameBoard.receivedAtk(7, 1);
+        gameBoard.receivedAtk(7, 2);
+        // destroyer
+        gameBoard.receivedAtk(6, 0);
+
     });
 
+
     beforeEach(() => {
-        gameBoard.placeShip(carrier, 0, 0, "horizontal")
+        gameBoard.placeShip(carrier, 0, 0, "horizontal");
+        gameBoard.placeShip(battleship, 1, 0, "vertical");
+        gameBoard.placeShip(cruiser, 8, 0, "horizontal");
+        gameBoard.placeShip(submarine, 7, 0, "horizontal");
+        gameBoard.placeShip(destroyer, 6, 0, "horizontal");
     });
 
     test("all ships not sunk return false", () => {
-        expect(gameBoard.shipWrecks()).toBe(false)
+        expect(gameBoard.shipWrecks()).toBe(false);
     });
 
     test("all ships sunk return true", () => {
-        expect(gameBoard.shipWrecks()).toBe(true)
+        attack();
+        expect(gameBoard.shipWrecks()).toBe(true);
     });
 
-  
+    test("one remaining ship return false", () => {
+        oneShipLeft();
+        expect(gameBoard.shipWrecks()).toBe(false);
+    });
 });
-
-
-
-
 
