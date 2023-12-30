@@ -67,11 +67,7 @@ export default function GameBoard() {
         const shipGrave = [];
 
         for (let i = 0; i < ships.length; i += 1) {
-            if(ships[i].isSunk() === true) {
-                shipGrave.push(ships[i].isSunk())
-            };
-            
-            if(ships[i].isSunk() === false) {
+            if(ships[i].isSunk() === true || ships[i].isSunk() === false) {
                 shipGrave.push(ships[i].isSunk())
             };
         };
