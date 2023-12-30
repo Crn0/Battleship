@@ -45,27 +45,27 @@ describe("ship creation", () => {
 describe("place ships", () => {
     test("place carrier", () => {
         expect(gameBoard.placeShip(carrier, 0, 0, "horizontal")).toBe(true); 
-        expect(gameBoard.board).toContain(carrier);
+        expect(gameBoard.board[0]).toContain(carrier);
     });
 
     test("place battleship", () => {
         expect(gameBoard.placeShip(battleship, 1, 0, "vertical")).toBe(true);
-        expect(gameBoard.board).toContain(battleship);
+        expect(gameBoard.board[1]).toContain(battleship);
     });
 
     test("place cruiser", () => {
         expect(gameBoard.placeShip(cruiser, 8, 0, "horizontal")).toBe(true);
-        expect(gameBoard.board).toContain(cruiser);
+        expect(gameBoard.board[8]).toContain(cruiser);
     });
 
     test("place submarine", () => {
         expect(gameBoard.placeShip(submarine, 7, 0, "horizontal")).toBe(true);
-        expect(gameBoard.board).toContain(submarine);
+        expect(gameBoard.board[7]).toContain(submarine);
     });
 
     test("place submarine", () => {
         expect(gameBoard.placeShip(destroyer, 6, 0, "horizontal")).toBe(true);
-        expect(gameBoard.board).toContain(destroyer);
+        expect(gameBoard.board[6]).toContain(destroyer);
     });
     
     test("does not place ship if the position is occupied horizontally", () => {
