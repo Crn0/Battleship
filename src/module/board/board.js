@@ -63,6 +63,22 @@ export default function GameBoard() {
         return true;
     };
 
+    const shipWrecks = (ships = dock) => {
+        const shipGrave = [];
+
+        for (let i = 0; i < ships.length; i += 1) {
+            if(ships[i].isSunk() === true) {
+                shipGrave.push(ships[i].isSunk())
+            };
+            
+            if(ships[i].isSunk() === false) {
+                shipGrave.push(ships[i].isSunk())
+            };
+        };
+        
+        return shipGrave.every(shipSunk => shipSunk === true);
+    };
+
     return Object.freeze({
         get board() { return board},
         get shipAttacks() { return shipAttacks},
@@ -70,6 +86,7 @@ export default function GameBoard() {
         createShip,
         placeShip,
         receivedAtk,
+        shipWrecks,
        
     });
 };
