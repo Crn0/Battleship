@@ -18,7 +18,7 @@ const posAvailable = (ship, row, col, dir, board) => {
 };
 
 export default function GameBoard() {
-    const board = Array.from({length: 10}, () => Array(10).fill(false));
+    const ocean = Array.from({length: 10}, () => Array(10).fill(false));
 
     const shipAttacks = Array.from({length: 10}, () => Array(10).fill(false));
 
@@ -32,7 +32,9 @@ export default function GameBoard() {
         return ship;
     }; 
 
-    const placeShip = (ship, row, col, dir) => {
+    const placeShip = (ship, row, col, dir, oceanBoard = ocean) => {
+        const board = oceanBoard;
+
         if(posAvailable(ship, row, col, dir, board)) {
             for (let i = 0; i < ship.length; i += 1) {
                 if(dir === "horizontal") {
@@ -50,7 +52,8 @@ export default function GameBoard() {
         return false
     };
 
-    const receivedAtk = (row, col) => {
+    const receivedAtk = (row, col, oceanBoard = ocean) => {
+        const board = oceanBoard;
         if(shipAttacks[row][col] === true) return false;
         if(board[row][col] === false && shipAttacks[row][col] === false) {
             shipAttacks[row][col] = true;
@@ -76,7 +79,7 @@ export default function GameBoard() {
     };
 
     return Object.freeze({
-        get board() { return board},
+        get board() { return ocean},
         get shipAttacks() { return shipAttacks},
         get dock() { return dock},
         createShip,
