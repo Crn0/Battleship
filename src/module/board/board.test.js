@@ -105,9 +105,6 @@ describe("receive attack", () => {
         expect(gameBoard.receivedAtk(1, 0)).toBe(false);
     });
 
-    test("do not attack the same position twice", () => {
-        expect(gameBoard.receivedAtk(1, 0)).toBe(false);
-    });
 });
 
 // ship is all sunk
