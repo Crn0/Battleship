@@ -49,7 +49,7 @@ describe("Create player", () => {
 });
 
 
-describe.skip("Player attack", () => {
+describe("Player attack", () => {
     const ships = [
         {
             name: "carrier",
@@ -92,17 +92,39 @@ describe.skip("Player attack", () => {
     });
 
     test("human player attacks computer player", () => {
-        const spyAtk = jest.spyOn(board2, "receivedAtk")
-        console.log(spyAtk.mock.calls)
-        player1.atkEnemy(0, 0)
-        expect(spyAtk).toBeCalled()
+        const spyAtk = jest.spyOn(board2, "receivedAtk");
+
+        expect(player1.atkEnemy(0, 0)).toBe(true);
+        
+        // console.log(player1.enemyBoard.shipAttacks[0])
+        expect(spyAtk).toBeCalled();
     });
 
-    test("computer player attacks human player", () => {
-        const spyAtk = jest.spyOn(board2, "receivedAtk")
-        console.log(spyAtk.mock.calls)
-        player2.atkEnemy(0, 0)
-        expect(spyAtk).toBeCalled()
+    test("human player cannot attack the same coord twice", () => {
+        const spyAtk = jest.spyOn(board2, "receivedAtk");
+
+        expect(player1.atkEnemy(0, 0)).toBe(true);
+
+        expect(player1.atkEnemy(0, 0)).toBe(false);
+
+        
+        // console.log(player1.enemyBoard.shipAttacks[0])
+        expect(spyAtk).toBeCalled();
+    });
+
+    test.skip("computer player attacks human player", () => {
+        const spyAtk = jest.spyOn(board1, "receivedAtk");
+   
+        player2.atkEnemy();
+        player2.atkEnemy();
+        player2.atkEnemy();
+
+        console.log(spyAtk.mock.results)
+        // check if all attacks hit the board
+        for(let i = 0; i < spyAtk.mock.calls.length; i += 1) {
+            expect(spyAtk.mock.results[i].value).toBe(true)
+        }
+        expect(spyAtk).toBeCalled();
     });
 
 });
