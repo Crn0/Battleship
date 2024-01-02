@@ -112,18 +112,29 @@ describe("Player attack", () => {
         expect(spyAtk).toBeCalled();
     });
 
-    test.skip("computer player attacks human player", () => {
+    test("computer player attacks human player", () => {
         const spyAtk = jest.spyOn(board1, "receivedAtk");
    
         player2.atkEnemy();
         player2.atkEnemy();
         player2.atkEnemy();
 
-        console.log(spyAtk.mock.results)
+        // console.log(spyAtk.mock.results)
+        
+
         // check if all attacks hit the board
+        
         for(let i = 0; i < spyAtk.mock.calls.length; i += 1) {
-            expect(spyAtk.mock.results[i].value).toBe(true)
-        }
+            
+            for (let j = 0; j < spyAtk.mock.calls[i].length; j += 1) {
+                const row = spyAtk.mock.calls[i][0]
+                const col = spyAtk.mock.calls[i][1]
+                expect(board1.shipAttacks[row][col]).toBe(true)  
+            };
+        };
+
+        expect(spyAtk.mock.calls).toHaveLength(3);
+
         expect(spyAtk).toBeCalled();
     });
 
