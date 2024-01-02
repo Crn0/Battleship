@@ -78,7 +78,7 @@ export default function GameBoard() {
         return shipGrave.every(shipSunk => shipSunk === true);
     };
 
-    return Object.freeze({
+    return {
         get board() { return ocean},
         get shipAttacks() { return shipAttacks},
         get dock() { return dock},
@@ -87,5 +87,5 @@ export default function GameBoard() {
         receivedAtk,
         shipWrecks,
        
-    });
+    }
 };
