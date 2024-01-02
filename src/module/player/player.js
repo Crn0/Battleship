@@ -14,13 +14,13 @@ export default function Player(name, board1, board2, isComputer = false) {
                 randomRow = Math.floor(Math.random() * 10);
                 randomCol = Math.floor(Math.random() * 10);
             }
-           
-            return enemyBoard.receivedAtk(randomRow, randomCol);
+            enemyBoard.receivedAtk(randomRow, randomCol);
+            return true
         };
 
         if(enemyBoard.shipAttacks[row][col] === false) {
-            
-            return enemyBoard.receivedAtk(row, col);
+            enemyBoard.receivedAtk(row, col);
+            return true
         };
         
         return false;
