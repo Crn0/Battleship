@@ -54,8 +54,9 @@ export default function GameBoard() {
 
     const receivedAtk = (row, col, oceanBoard = ocean) => {
         const board = oceanBoard;
-        if(shipAttacks[row][col] === true) return false;
+
         if(board[row][col] === false && shipAttacks[row][col] === false) {
+            console.log(shipAttacks[row][col], board[row][col])
             shipAttacks[row][col] = true;
             return false;
         };
@@ -87,5 +88,5 @@ export default function GameBoard() {
         receivedAtk,
         shipWrecks,
        
-    }
+    };
 };
