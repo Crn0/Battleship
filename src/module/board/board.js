@@ -56,14 +56,14 @@ export default function GameBoard() {
         const board = oceanBoard;
 
         if(board[row][col] === false && shipAttacks[row][col] === false) {
-            console.log(shipAttacks[row][col], board[row][col])
+         
             shipAttacks[row][col] = true;
             return false;
         };
 
         board[row][col].hit()
         shipAttacks[row][col] = true;
-
+       
         return true;
     };
 
@@ -79,7 +79,7 @@ export default function GameBoard() {
         return shipGrave.every(shipSunk => shipSunk === true);
     };
 
-    return {
+    return Object.freeze({
         get board() { return ocean},
         get shipAttacks() { return shipAttacks},
         get dock() { return dock},
@@ -87,6 +87,5 @@ export default function GameBoard() {
         placeShip,
         receivedAtk,
         shipWrecks,
-       
-    };
+    });
 };
