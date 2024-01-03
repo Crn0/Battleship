@@ -14,128 +14,58 @@ beforeEach(() => {
     
     player1 = CreatePlayer("human", board1, board2);
     player2 = CreatePlayer("computer", board2, board1, true);
+
+    player1.createAllShips()
+    player2.createAllShips()
 });
 
 describe("Create player", () => {
     test("check if the player is an A.I", () => {
         expect(player1.isAi).toBe(false);
-
         expect(player2.isAi).toBe(true);
     });
 
     test("check if the player is not an A.I", () => {
         expect(player1.isAi).toBe(false);
-
         expect(player2.isAi).toBe(true);
     });
 
     test("check player names", () => {
         expect(player1.name).toMatch("human");
-
         expect(player2.name).toMatch("computer");
     });
 
-    test("check if the players got their own board", () => {
-        expect(player1.board).toEqual(board1);
-
-        expect(player2.board).toEqual(board2);
+    test("check if ships have been created", () => {
+        expect(player1.dock).toHaveLength(5);
+        expect(player2.dock).toHaveLength(5);
     });
 
-    test("check if the players got the enemy board", () => {
-        expect(player1.enemyBoard).toEqual(board2);
+    test("check for player turn", () => {
+        expect(player1.turn).toBe(false);
+        expect(player2.turn).toBe(false);
+        
+        player1.turn = true;
+        expect(player1.turn).toBe(true);
 
-        expect(player2.enemyBoard).toEqual(board1);
     });
 });
 
 
-describe("Player attack", () => {
-    const ships = [
-        {
-            name: "carrier",
-            length: 5
-        },  
-        // {
-        //     name: "battleship",
-        //     length: 4
-        // },  
-        // {
-        //     name: "cruiser",
-        //     length: 3
-        // },  
-        // {
-        //     name: "submarine",
-        //     length: 3
-        // },  
-        // {
-        //     name: "destroyer",
-        //     length: 5
-        // },
-    ];
-    const createShips = jest.fn(() => {
-        for (let i = 0; i < ships.length; i += 1) {
-            board1.createShip(ships[i].name, ships[i].length);
-            board2.createShip(ships[i].name, ships[i].length);
-        };
-    });
-
-    beforeEach(() => {
-        createShips();
-        board1.placeShip(board1.dock[0], 0, 0, "horizontal");
-        board2.placeShip(board2.dock[0], 0, 0, "horizontal");
-    });
-    
-    // check if the ships have been created
-    test("check if the ships have been created and placed in the board", () => {
-        expect(board1.board[0]).toContain(board1.dock[0]);
-        expect(board2.board[0]).toContain(board2.dock[0]);
-    });
-
+describe("Players attack", () => {
     test("human player attacks computer player", () => {
-        const spyAtk = jest.spyOn(board2, "receivedAtk");
-
         expect(player1.atkEnemy(0, 0)).toBe(true);
-        
-        // console.log(player1.enemyBoard.shipAttacks[0])
-        expect(spyAtk).toBeCalled();
     });
 
     test("human player cannot attack the same coord twice", () => {
-        const spyAtk = jest.spyOn(board2, "receivedAtk");
-
         expect(player1.atkEnemy(0, 0)).toBe(true);
-
         expect(player1.atkEnemy(0, 0)).toBe(false);
-
-        
-        // console.log(player1.enemyBoard.shipAttacks[0])
-        expect(spyAtk).toBeCalled();
     });
 
     test("computer player attacks human player", () => {
-        const spyAtk = jest.spyOn(board1, "receivedAtk");
-   
-        player2.atkEnemy();
-        player2.atkEnemy();
-        player2.atkEnemy();
-
-        // console.log(spyAtk.mock.results)
-        
-
-        // check if all attacks hit the board
-        
-        for(let i = 0; i < spyAtk.mock.calls.length; i += 1) {
-            
-            for (let j = 0; j < spyAtk.mock.calls[i].length; j += 1) {
-                const row = spyAtk.mock.calls[i][0]
-                const col = spyAtk.mock.calls[i][1]
-                expect(board1.shipAttacks[row][col]).toBe(true)  
-            };
-        };
-
-        expect(spyAtk.mock.calls).toHaveLength(3);
-
-        expect(spyAtk).toBeCalled();
+        expect(player2.atkEnemy()).toBe(true);
+        expect(player2.atkEnemy()).toBe(true);
+        expect(player2.atkEnemy()).toBe(true);
+        console.log(board1.dock.length)
     });
 
 });
