@@ -1,14 +1,55 @@
-export default function Player(name, board1, board2, isComputer = false) {
+
+
+export default function Player(name, board, enemyBoard, isComputer = false) {
     const isAi = isComputer;
  
-    const board = board1;
- 
-    const enemyBoard = board2;
+    const ocean = board;
+
+    let turn = false;
+
+    const shipBluePrints = [
+        {
+            name: "carrier",
+            length: 5,
+        },
+        {
+    
+            name: "battleship",
+            length: 4,
+        },
+        {
+    
+            name: "cruiser",
+            length: 3
+        },
+        {
+    
+            name: "submarine",
+            length: 3
+        },
+        {
+    
+            name: "destroyer",
+            length: 2
+        },
+    ];
+
+    const {dock} = ocean;
+
+    const createAllShips = () => {
+        for (let i = 0; i < shipBluePrints.length; i += 1) {
+
+            ocean.createShip(shipBluePrints[i].name, shipBluePrints[i].length)
+        };
+
+
+        return true;
+    };
 
     const atkEnemy = (row, col) => {
         if(isAi) {
             let randomRow = Math.floor(Math.random() * 10);
-            let randomCol = Math.floor(Math.random() * 3);
+            let randomCol = Math.floor(Math.random() * 10);
        
             while(enemyBoard.shipAttacks[randomRow][randomCol] === true) {
                 randomRow = Math.floor(Math.random() * 10);
@@ -20,6 +61,7 @@ export default function Player(name, board1, board2, isComputer = false) {
 
         if(enemyBoard.shipAttacks[row][col] === false) {
             enemyBoard.receivedAtk(row, col);
+            
             return true
         };
         
@@ -29,8 +71,11 @@ export default function Player(name, board1, board2, isComputer = false) {
      return Object.freeze({
          get name() { return name},
          get isAi() { return isAi},
-         get board() { return board},
-         get enemyBoard() { return enemyBoard},
-         atkEnemy
+         get board() { return ocean},
+         get dock() { return dock},
+         get turn() { return turn},
+         set turn(val) { turn = val}, 
+         atkEnemy,
+         createAllShips,
      });
  };
