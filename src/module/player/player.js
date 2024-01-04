@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 
 
 export default function Player(name, board, enemyBoard, isComputer = false) {
@@ -46,6 +47,33 @@ export default function Player(name, board, enemyBoard, isComputer = false) {
         return true;
     };
 
+    const placeShip = (ship, row, col, dir) => {
+        if(isAi) {
+            const queue = [...ocean.dock]
+        
+            while(queue.length !== 0) {
+                const currentShip = queue[0];
+                
+                const randomRow = Math.floor(Math.random() * 9);
+                const randomCol = Math.floor(Math.random() * 9);
+                
+                const direction = ["horizontal", "vertical"];
+
+                const randomDir = Math.floor(Math.random() * direction.length);
+                
+                if(ocean.posAvailable(currentShip, randomRow, randomCol, direction[randomDir], ocean.board)) {
+                    ocean.placeShip(currentShip, randomRow, randomCol, direction[randomDir]);
+            
+                    queue.shift();
+                };
+            };
+            
+            return true;
+        };
+        
+        return ocean.placeShip(ship, row, col, dir)
+    };
+
     const atkEnemy = (row, col) => {
         if(Number.isInteger(row) && Number.isInteger(col) && enemyBoard.shipAttacks[row][col] === true) return false;
 
@@ -75,5 +103,6 @@ export default function Player(name, board, enemyBoard, isComputer = false) {
          set turn(val) { turn = val}, 
          atkEnemy,
          createAllShips,
+         placeShip
      });
  };
