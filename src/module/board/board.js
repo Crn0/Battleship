@@ -20,11 +20,13 @@ export default function GameBoard() {
     
         for (let i = 0; i < ship.length; i += 1) {
             if(dir === "horizontal") {
+                if(col + i > 9)  return false;
                 array.push(board[row][col + i]);
             };
     
             if(dir === "vertical") {
-                array.push(board[row + i][col])
+                if(row + i > 9)  return false;
+                array.push(board[row + i][col]);
             };
             
         };
@@ -86,6 +88,6 @@ export default function GameBoard() {
         placeShip,
         receivedAtk,
         shipWrecks,
-        posAvailable,
+        posAvailable
     });
 };
