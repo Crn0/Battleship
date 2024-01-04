@@ -58,7 +58,7 @@ describe("Players attack", () => {
     });
 
     test("human player cannot attack the same coord twice", () => {
-       
+        player1.atkEnemy(0, 0)
         expect(player1.atkEnemy(0, 0)).toBe(false);
     });
 
