@@ -47,6 +47,8 @@ export default function Player(name, board, enemyBoard, isComputer = false) {
     };
 
     const atkEnemy = (row, col) => {
+        if(Number.isInteger(row) && Number.isInteger(col) && enemyBoard.shipAttacks[row][col] === true) return false;
+
         if(isAi) {
             let randomRow = Math.floor(Math.random() * 10);
             let randomCol = Math.floor(Math.random() * 10);
@@ -54,18 +56,14 @@ export default function Player(name, board, enemyBoard, isComputer = false) {
             while(enemyBoard.shipAttacks[randomRow][randomCol] === true) {
                 randomRow = Math.floor(Math.random() * 10);
                 randomCol = Math.floor(Math.random() * 10);
-            }
+            };
+            
             enemyBoard.receivedAtk(randomRow, randomCol);
-            return true
+            return true;
         };
 
-        if(enemyBoard.shipAttacks[row][col] === false) {
-            enemyBoard.receivedAtk(row, col);
-            
-            return true
-        };
-        
-        return false;
+        enemyBoard.receivedAtk(row, col);
+        return true
     };
  
      return Object.freeze({
