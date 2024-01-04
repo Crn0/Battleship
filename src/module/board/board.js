@@ -1,22 +1,5 @@
 import Ship from "../ship/ship";
 
-const posAvailable = (ship, row, col, dir, board) => {
-    const array = [];
-
-    for (let i = 0; i < ship.length; i += 1) {
-        if(dir === "horizontal") {
-            array.push(board[row][col + i]);
-        };
-
-        if(dir === "vertical") {
-            array.push(board[row + i][col])
-        };
-        
-    };
-
-    return array.every((cell) => cell === false);
-};
-
 export default function GameBoard() {
     const ocean = Array.from({length: 10}, () => Array(10).fill(false));
 
@@ -31,6 +14,23 @@ export default function GameBoard() {
 
         return ship;
     }; 
+
+    const posAvailable = (ship, row, col, dir, board) => {
+        const array = [];
+    
+        for (let i = 0; i < ship.length; i += 1) {
+            if(dir === "horizontal") {
+                array.push(board[row][col + i]);
+            };
+    
+            if(dir === "vertical") {
+                array.push(board[row + i][col])
+            };
+            
+        };
+    
+        return array.every((cell) => cell === false);
+    };
 
     const placeShip = (ship, row, col, dir, oceanBoard = ocean) => {
         const board = oceanBoard;
@@ -54,17 +54,16 @@ export default function GameBoard() {
 
     const receivedAtk = (row, col, oceanBoard = ocean) => {
         const board = oceanBoard;
-
-        if(board[row][col] === false && shipAttacks[row][col] === false) {
-         
+        
+        if(shipAttacks[row][col] === false && board[row][col] !== false) {
+            board[row][col].hit();
             shipAttacks[row][col] = true;
-            return false;
-        };
 
-        board[row][col].hit()
+            return true;
+        };
+     
         shipAttacks[row][col] = true;
-       
-        return true;
+        return false;
     };
 
     const shipWrecks = (ships = dock) => {
@@ -87,5 +86,6 @@ export default function GameBoard() {
         placeShip,
         receivedAtk,
         shipWrecks,
+        posAvailable,
     });
 };
