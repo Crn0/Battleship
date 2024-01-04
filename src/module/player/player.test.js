@@ -51,6 +51,106 @@ describe("Create player", () => {
 });
 
 
+describe("place player ships horizontal", () => {
+    // horizontal
+    test("place carrier", () => {
+        // expect(player1.placeShip(player1.dock[0], 0, 0, "horizontal")).toBe(true); 
+        player1.placeShip(player1.dock[0], 5, 0, "horizontal")
+        // expect(player1.placeShip(player1.dock[0], 5, 7, "vertical")).toBe(true); 
+        const checkLength = [...Array(player1.board.dock[0].length)].every((_, i) => 
+        expect(player1.board.board[5][0 + i]).toEqual(player1.board.dock[0])
+        );
+    });
+    test("place battleship", () => {
+        player1.placeShip(player1.dock[1], 1, 0, "horizontal")
+        const checkLength = [...Array(player1.board.dock[1].length)].every((_, i) => 
+        expect(player1.board.board[1][0 + i]).toEqual(player1.board.dock[1])
+        );
+    });
+    test("place cruiser", () => {
+        expect(player1.placeShip(player1.dock[2], 2, 0, "horizontal")).toBe(true); 
+        const checkLength = [...Array(player1.board.dock[2].length)].every((_, i) => 
+        expect(player1.board.board[2][0 + i]).toEqual(player1.board.dock[2])
+        );
+    });
+    test("place submarine", () => {
+        expect(player1.placeShip(player1.dock[3], 3, 0, "horizontal")).toBe(true); 
+        const checkLength = [...Array(player1.board.dock[3].length)].every((_, i) => 
+        expect(player1.board.board[3][0 + i]).toEqual(player1.board.dock[3])
+        );
+    });
+    test("place destroyer", () => {
+        expect(player1.placeShip(player1.dock[4], 4, 0, "horizontal")).toBe(true); 
+        const checkLength = [...Array(player1.board.dock[4].length)].every((_, i) => 
+        expect(player1.board.board[4][0 + i]).toEqual(player1.board.dock[4])
+        );
+    });
+   
+    // test occupied space
+    test("don't place in occupied space", () => {
+        player1.placeShip(player1.dock[4], 4, 0, "horizontal");
+        expect(player1.placeShip(player1.dock[4], 4, 0, "horizontal")).toBe(false); 
+    });
+
+    test("don't place if it will go out of board", () => {
+        expect(player1.placeShip(player1.dock[0], 0, 19, "horizontal")).toBe(false);
+        
+    });
+});
+
+describe("place player ships vertical", () => {
+    // vertical
+    test("place carrier", () => {
+        player1.placeShip(player1.dock[0], 5, 0, "vertical")
+        const checkLength = [...Array(player1.board.dock[0].length)].every((_, i) => 
+        expect(player1.board.board[5 + i][0]).toEqual(player1.board.dock[0])
+        );
+    });
+    test("place battleship", () => {
+        player1.placeShip(player1.dock[1], 1, 0, "vertical")
+        const checkLength = [...Array(player1.board.dock[1].length)].every((_, i) => 
+        expect(player1.board.board[1 + i][0]).toEqual(player1.board.dock[1])
+        );
+    });
+    test("place cruiser", () => {
+        expect(player1.placeShip(player1.dock[2], 2, 0, "vertical")).toBe(true); 
+        const checkLength = [...Array(player1.board.dock[2].length)].every((_, i) => 
+        expect(player1.board.board[2 + i][0]).toEqual(player1.board.dock[2])
+        );
+    });
+    test("place submarine", () => {
+        expect(player1.placeShip(player1.dock[3], 3, 0, "vertical")).toBe(true); 
+        const checkLength = [...Array(player1.board.dock[3].length)].every((_, i) => 
+        expect(player1.board.board[3 + i][0]).toEqual(player1.board.dock[3])
+        );
+    });
+    test("place destroyer", () => {
+        expect(player1.placeShip(player1.dock[4], 4, 0, "vertical")).toBe(true); 
+        const checkLength = [...Array(player1.board.dock[4].length)].every((_, i) => 
+        expect(player1.board.board[4 + i][0]).toEqual(player1.board.dock[4])
+        );
+    });
+   
+    // test occupied space
+    test("don't place in occupied space", () => {
+        player1.placeShip(player1.dock[4], 4, 0, "horizontal");
+        expect(player1.placeShip(player1.dock[4], 4, 0, "horizontal")).toBe(false); 
+    });
+
+    test("don't place if it will go out of board", () => {
+        expect(player1.placeShip(player1.dock[0], 7, 8, "vertical")).toBe(false); 
+    });
+});
+
+describe("random place ships", () => {
+    test("check if all has been placed", () => {
+        player2.placeShip()
+        const findShips = player2.board.board.map((row) => row.filter(col => col !== false))
+        expect(findShips.flat()).toHaveLength(17)
+        // console.table(player2.board.board)
+    });
+});
+
 describe("Players attack", () => {
     test("human player attacks computer player", () => {
         player1.atkEnemy(0, 0)
@@ -58,12 +158,13 @@ describe("Players attack", () => {
     });
 
     test("human player cannot attack the same coord twice", () => {
-        player1.atkEnemy(0, 0)
+        player1.atkEnemy(0, 0);
         expect(player1.atkEnemy(0, 0)).toBe(false);
     });
 
     test("computer player attacks human player", () => {
         const mockAtk = jest.fn(() => player2.atkEnemy());
+        player1.placeShip(player1.dock[0], 5, 0, "horizontal")
         mockAtk();
         mockAtk();
         mockAtk();
@@ -75,6 +176,8 @@ describe("Players attack", () => {
         // will return false, if the computer land a hit in human board
         const checkAtk = attacksArr.every(cell => cell === false);
         expect(checkAtk).toBe(false);
+        
+        // expect(player1.board.board[5][0].health).toBeGreaterThanOrEqual(0);
     });
 
 });
