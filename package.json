@@ -6,6 +6,7 @@
   "scripts": {
     "test": "jest",
     "watch": "webpack --watch",
+    "battleship": "git subtree push --prefix dist origin gh-pages",
     "build": "webpack"
   },
   "author": "",
