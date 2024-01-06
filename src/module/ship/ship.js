@@ -7,6 +7,11 @@ export default function Ship(name, length) {
         return true;
     };
 
+    const resetHealth = () => {
+        health = 0;
+        return health
+    };
+
     const isSunk = () => {
         if(health === length) return true;
         
@@ -17,6 +22,7 @@ export default function Ship(name, length) {
         get name() { return name },
         get length() { return length },
         hit,
+        resetHealth,
         isSunk,
     });
 };
