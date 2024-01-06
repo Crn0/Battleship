@@ -108,10 +108,78 @@ describe("ship attack", () => {
         dock.push(submarine);
         dock.push(destroyer);
 
-        dock.forEach(ship => expect(ship.isSunk()).toBeFalsy())
+        dock.forEach(ship => expect(ship.isSunk()).toBeFalsy());
 
     });
 
+});
+
+describe("reset health", () => {
+
+    test("reset carrier health", () => {
+        const shipHit = jest.fn(() => {
+            let i = 0;
+            while(i < carrier.length) {
+                carrier.hit();
+                i += 1;
+            };
+        });
+        shipHit();
+        carrier.resetHealth();
+        expect(carrier.isSunk()).toBeFalsy();
+    });
+
+    test("reset battleship health", () => {
+        const shipHit = jest.fn(() => {
+            let i = 0;
+            while(i < battleship.length) {
+                battleship.hit();
+                i += 1;
+            };
+        });
+        shipHit();
+        battleship.resetHealth();
+        expect(battleship.isSunk()).toBeFalsy();
+    });
+
+    test("reset cruiser health", () => {
+        const shipHit = jest.fn(() => {
+            let i = 0;
+            while(i < cruiser.length) {
+                cruiser.hit();
+                i += 1
+            };
+        });
+        shipHit();
+        cruiser.resetHealth();
+        expect(cruiser.isSunk()).toBeFalsy();
+    });
+
+    test("reset submarine health", () => {
+        const shipHit = jest.fn(() => {
+            let i = 0;
+            while(i < submarine.length) {
+                submarine.hit();
+                i += 1;
+            };
+        });
+        shipHit();
+        submarine.resetHealth();
+        expect(submarine.isSunk()).toBeFalsy();
+    });
+
+    test("reset destroyer health", () => {
+        const shipHit = jest.fn(() => {
+            let i = 0
+            while(i < destroyer.length) {
+                destroyer.hit();
+                i += 1;
+            };
+        });
+        shipHit();
+        destroyer.resetHealth();
+        expect(destroyer.isSunk()).toBeFalsy();
+    });
 });
 
 
