@@ -1,12 +1,15 @@
-/* eslint-disable no-unused-vars */
-
+import Helper from "../helper/helper";
 
 export default function Player(name, board, enemyBoard, isComputer = false) {
     const isAi = isComputer;
- 
+    
+    let playerName = name
+
     const ocean = board;
 
-    let turn = false;
+    const helper = Helper();
+
+    const legalAttacks = helper.legalMoves(ocean);
 
     const shipBluePrints = [
         {
@@ -39,18 +42,16 @@ export default function Player(name, board, enemyBoard, isComputer = false) {
 
     const createAllShips = () => {
         for (let i = 0; i < shipBluePrints.length; i += 1) {
-
             ocean.createShip(shipBluePrints[i].name, shipBluePrints[i].length)
         };
 
-
         return true;
     };
-
+    
     const placeShip = (ship, row, col, dir) => {
         if(isAi) {
             const queue = [...ocean.dock]
-        
+   
             while(queue.length !== 0) {
                 const currentShip = queue[0];
                 
@@ -61,7 +62,7 @@ export default function Player(name, board, enemyBoard, isComputer = false) {
 
                 const randomDir = Math.floor(Math.random() * direction.length);
                 
-                if(ocean.posAvailable(currentShip, randomRow, randomCol, direction[randomDir], ocean.board)) {
+                if(helper.posAvailable(currentShip, randomRow, randomCol, direction[randomDir], ocean.ocean)) {
                     ocean.placeShip(currentShip, randomRow, randomCol, direction[randomDir]);
             
                     queue.shift();
@@ -74,33 +75,28 @@ export default function Player(name, board, enemyBoard, isComputer = false) {
         return ocean.placeShip(ship, row, col, dir)
     };
 
+   
+
     const atkEnemy = (row, col) => {
         if(Number.isInteger(row) && Number.isInteger(col) && enemyBoard.shipAttacks[row][col] === true) return false;
 
         if(isAi) {
-            let randomRow = Math.floor(Math.random() * 10);
-            let randomCol = Math.floor(Math.random() * 10);
-       
-            while(enemyBoard.shipAttacks[randomRow][randomCol] === true) {
-                randomRow = Math.floor(Math.random() * 10);
-                randomCol = Math.floor(Math.random() * 10);
-            };
-            
-            enemyBoard.receivedAtk(randomRow, randomCol);
+            const availableIndex = legalAttacks.filter((val) =>  enemyBoard.shipAttacks[val[0]][val[1]] !== true);
+            const choice = availableIndex[Math.floor(Math.random() * availableIndex.length)];
+          
+            enemyBoard.receivedAtk(choice[0], choice[1]);
             return true;
         };
-
+        
         enemyBoard.receivedAtk(row, col);
         return true
     };
  
      return Object.freeze({
-         get name() { return name},
-         get isAi() { return isAi},
+         get name() { return playerName},
+         set name(val) { playerName = val}, 
          get board() { return ocean},
          get dock() { return dock},
-         get turn() { return turn},
-         set turn(val) { turn = val}, 
          atkEnemy,
          createAllShips,
          placeShip
