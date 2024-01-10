@@ -58,31 +58,31 @@ describe("place player ships horizontal", () => {
         player1.placeShip(player1.dock[0], 5, 0, "horizontal")
         // expect(player1.placeShip(player1.dock[0], 5, 7, "vertical")).toBe(true); 
         const checkLength = [...Array(player1.board.dock[0].length)].every((_, i) => 
-        expect(player1.board.board[5][0 + i]).toEqual(player1.board.dock[0])
+        expect(player1.board.ocean[5][0 + i]).toEqual(player1.board.dock[0])
         );
     });
     test("place battleship", () => {
         player1.placeShip(player1.dock[1], 1, 0, "horizontal")
         const checkLength = [...Array(player1.board.dock[1].length)].every((_, i) => 
-        expect(player1.board.board[1][0 + i]).toEqual(player1.board.dock[1])
+        expect(player1.board.ocean[1][0 + i]).toEqual(player1.board.dock[1])
         );
     });
     test("place cruiser", () => {
         expect(player1.placeShip(player1.dock[2], 2, 0, "horizontal")).toBe(true); 
         const checkLength = [...Array(player1.board.dock[2].length)].every((_, i) => 
-        expect(player1.board.board[2][0 + i]).toEqual(player1.board.dock[2])
+        expect(player1.board.ocean[2][0 + i]).toEqual(player1.board.dock[2])
         );
     });
     test("place submarine", () => {
         expect(player1.placeShip(player1.dock[3], 3, 0, "horizontal")).toBe(true); 
         const checkLength = [...Array(player1.board.dock[3].length)].every((_, i) => 
-        expect(player1.board.board[3][0 + i]).toEqual(player1.board.dock[3])
+        expect(player1.board.ocean[3][0 + i]).toEqual(player1.board.dock[3])
         );
     });
     test("place destroyer", () => {
         expect(player1.placeShip(player1.dock[4], 4, 0, "horizontal")).toBe(true); 
         const checkLength = [...Array(player1.board.dock[4].length)].every((_, i) => 
-        expect(player1.board.board[4][0 + i]).toEqual(player1.board.dock[4])
+        expect(player1.board.ocean[4][0 + i]).toEqual(player1.board.dock[4])
         );
     });
    
@@ -103,31 +103,31 @@ describe("place player ships vertical", () => {
     test("place carrier", () => {
         player1.placeShip(player1.dock[0], 5, 0, "vertical")
         const checkLength = [...Array(player1.board.dock[0].length)].every((_, i) => 
-        expect(player1.board.board[5 + i][0]).toEqual(player1.board.dock[0])
+        expect(player1.board.ocean[5 + i][0]).toEqual(player1.board.dock[0])
         );
     });
     test("place battleship", () => {
         player1.placeShip(player1.dock[1], 1, 0, "vertical")
         const checkLength = [...Array(player1.board.dock[1].length)].every((_, i) => 
-        expect(player1.board.board[1 + i][0]).toEqual(player1.board.dock[1])
+        expect(player1.board.ocean[1 + i][0]).toEqual(player1.board.dock[1])
         );
     });
     test("place cruiser", () => {
         expect(player1.placeShip(player1.dock[2], 2, 0, "vertical")).toBe(true); 
         const checkLength = [...Array(player1.board.dock[2].length)].every((_, i) => 
-        expect(player1.board.board[2 + i][0]).toEqual(player1.board.dock[2])
+        expect(player1.board.ocean[2 + i][0]).toEqual(player1.board.dock[2])
         );
     });
     test("place submarine", () => {
         expect(player1.placeShip(player1.dock[3], 3, 0, "vertical")).toBe(true); 
         const checkLength = [...Array(player1.board.dock[3].length)].every((_, i) => 
-        expect(player1.board.board[3 + i][0]).toEqual(player1.board.dock[3])
+        expect(player1.board.ocean[3 + i][0]).toEqual(player1.board.dock[3])
         );
     });
     test("place destroyer", () => {
         expect(player1.placeShip(player1.dock[4], 4, 0, "vertical")).toBe(true); 
         const checkLength = [...Array(player1.board.dock[4].length)].every((_, i) => 
-        expect(player1.board.board[4 + i][0]).toEqual(player1.board.dock[4])
+        expect(player1.board.ocean[4 + i][0]).toEqual(player1.board.dock[4])
         );
     });
    
@@ -145,7 +145,7 @@ describe("place player ships vertical", () => {
 describe("random place ships", () => {
     test("check if all has been placed", () => {
         player2.placeShip()
-        const findShips = player2.board.board.map((row) => row.filter(col => col !== false))
+        const findShips = player2.board.ocean.map((row) => row.filter(col => col !== false))
         expect(findShips.flat()).toHaveLength(17)
         // console.table(player2.board.board)
     });
