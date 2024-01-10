@@ -1,4 +1,4 @@
-import DomController from "./module/dom/dom";
+import DomController from "./module/dom/dom-controller"
 // import game from "./module/game/game"
 import "./style.css";
 
