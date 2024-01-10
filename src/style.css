@@ -1,0 +1,183 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+
+.form-container {
+    display: grid;
+    place-content: center;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+form {
+    height: 250px;
+    margin: 10px;
+    padding: 10px;
+    display: grid;
+    place-items: center;
+    text-align: center;
+}
+
+form > button, .place-ship {
+    width: 4rem;
+    height: 2rem;
+    background-color: white;
+    color: black;
+    border: 1px solid red;
+}
+
+form > button:hover, .place-ship:hover {
+    background-color: red;
+    color: white;
+} 
+
+.game-container {
+   display: grid;
+   grid-template-columns: 1fr 1fr 1fr;
+   place-content: center;
+   place-items: center;
+   margin-top: 10px;
+   
+}
+
+.game-container {
+    display: none;
+}
+
+.p1-container {
+    grid-column: 1;
+}
+
+.announcement {
+    grid-column: 2;
+}
+
+.p2-container {
+    grid-column: 3;
+}
+
+.p1-container, .p2-container {
+    display: grid;
+    gap: 10px;
+}
+
+.boards {
+    display: grid;
+    width: 500px;
+    height: 500px;
+    grid-template-columns: repeat(10, 1fr);
+    grid-template-rows: repeat(10, 1fr);
+}
+
+.ship-placement{
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+.vertical-dock {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    width: 100px;
+    gap: 10px;
+}
+
+.horizontal-dock {
+    display: grid;
+    gap: 10px;
+}
+
+/* .vertical-dock {
+    border: 1px solid black;
+    display: grid;
+    grid-template-columns: repeat(auto-fit,minmax(100px, 150px));
+    width: 50px;
+} */
+
+.battleship-vertical-height {
+    height: 199px;
+   
+}
+
+.cruiser-submarine-vertical-height {
+    height: 150px;
+   
+}
+
+.destroyer-vertical-height {
+    height: 100px;
+}
+
+/*  */
+.carrier-horizontal-height {
+    display: flex;
+    width: auto;
+    height: 50px;
+    gap: 1.5px;
+}
+
+.battleship-horizontal-height {
+    display: flex;
+    width: 190px;
+    height: 50px;
+    gap: 1.5px;
+}
+
+.cruiser-submarine-horizontal-height {
+    display: flex;
+    width: 150px;
+    height: 50px;
+    gap: 1.5px;
+}
+
+.destroyer-horizontal-height {
+    display: flex;
+    width: 100px;
+    height: 50px;
+    gap: 1.5px;
+}
+
+
+.shipment {
+    height: 50px;
+    width: 50px;
+    border: 1px solid black;
+    background: blue;
+}
+
+.shipment-valid {
+    background-color: green;
+}
+
+.shipment-invalid {
+    background-color: red;
+}
+
+
+.cell-computer {
+    pointer-events: none
+}
+
+.cell-human, .cell-computer  {
+    /* background-color: aliceblue; */
+    background: thistle;
+    border: 1px solid white;
+}
+
+.hide-btn, .create-ship {
+    display: none;
+}
+
+.ship {
+    background-color: blue;
+}
+
+.hit {
+    background-color: blanchedalmond;
+}
+
+.sink {
+    background-color: red;
+}
