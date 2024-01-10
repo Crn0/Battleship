@@ -6,6 +6,88 @@
     <title>Battleship</title>
 </head>
 <body>
-    <div class="game-container"></div>
+    <div class="game-container">
+        <div class="p1-container">
+            <div class="player-one-name-container">
+                <div class="player-name"></div>
+            </div>
+            
+            <div class="boards human-board"></div>
+        </div>
+        <div class="announcement">
+            <div class="error"></div>
+            <div class="winner"></div>
+            <div class="dock vertical-dock">
+               
+                <div class="vertical-dir" data-name="carrier" data-length="5" data-index="0" draggable="true">
+                    <button class="shipment"></button>
+                    <button class="shipment"></button>
+                    <button class="shipment"></button>
+                    <button class="shipment"></button>
+                    <button class="shipment"></button>
+                </div>
+
+                <div class="vertical-dir battleship-vertical-height" data-name="battleship" data-length="4" data-index="1" draggable="true">
+                    <button class="shipment"></button>
+                    <button class="shipment"></button>
+                    <button class="shipment"></button>
+                    <button class="shipment"></button>
+                </div>
+
+                <div class="vertical-dir cruiser-submarine-vertical-height" data-name="cruiser" data-length="3" data-index="2" draggable="true">
+                    <button class="shipment"></button>
+                    <button class="shipment"></button>
+                    <button class="shipment"></button>
+                </div>
+
+                <div class="vertical-dir cruiser-submarine-vertical-height" data-name="submarine" data-length="3" data-index="3" draggable="true">
+                    <button class="shipment"></button>
+                    <button class="shipment"></button>
+                    <button class="shipment"></button>
+                </div>
+
+                <div class="vertical-dir destroyer-vertical-height" data-name="destroyer" data-length="2" data-index="4" draggable="true">
+                    <button class="shipment"></button>
+                    <button class="shipment"></button>
+                </div>
+                
+
+            </div>
+            <div class="direction">
+                <label for="dir-select">Choose a direction:</label>
+
+                <select id="dir-select">
+                    <option value="vertical">Vertical</option>
+                    <option value="horizontal">Horizontal</option>
+
+                </select>
+            </div>
+        </div>
+        <div class="p2-container">
+            <div class="player-two-name-container">
+                <div class="player-name"></div>
+            </div>
+
+            <div class="boards computer-board"></div>
+
+            
+        </div>
+
+    </div>
+    <div class="form-container">
+        <form>
+            <label>
+                <p>Input name</p>
+                <input type="text" name="player-name" id="player-name">
+            </label>
+            <button type="button" id="start">create</button>
+        </form>
+    </div>
+
+    <div class="ship-placement">
+        
+        <button class="place-ship hide-btn">start</button>
+       
+    </div>
 </body>
 </html>
