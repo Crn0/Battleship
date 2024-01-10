@@ -3,7 +3,7 @@ import createGame from "./board-player/board-player";
 import Portage from "./ship-portage/ship-portage"
 import DomState from "./dom-state/dom-state";
 
-export default function Dom() {
+export default function DomController() {
     const container = document.querySelector(".game-container");
     const placeShipBtn = document.querySelector(".place-ship");
 
