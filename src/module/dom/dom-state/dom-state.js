@@ -53,8 +53,6 @@ const updateScreen = (option) => {
                 return cell;
             };
 
-           
-
             return true;
         };
 
@@ -114,8 +112,6 @@ const playLogic = async (e,option) => {
 
 export default function DomState(option) {
     const board = document.querySelector(".computer-board");
-
-    // if(option.isSunkAll()) return gameOver(option);
 
     board.addEventListener("click", (e) => {
         playLogic(e, option).then((data) => {

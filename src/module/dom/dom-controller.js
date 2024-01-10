@@ -9,7 +9,7 @@ export default function DomController() {
 
     const game = Game();   
 
-    const createPlayerAndBoard = () => createGame(game.players, container, placeShipBtn)
+    const createPlayerAndBoard = () => createGame(game.players, container)
 
     const placeShip = () => Portage(game, placeShipBtn);
 

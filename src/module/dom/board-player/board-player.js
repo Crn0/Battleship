@@ -6,12 +6,6 @@ const createBoard = (option) => {
     const boardOneContainer = document.querySelector(".human-board");
     const boardTwoContainer = document.querySelector(".computer-board");
 
-    // boardOneContainer.className = "boards"
-    // boardOneContainer.classList.add("human-board")
-
-    // boardTwoContainer.className = "boards"
-    // boardTwoContainer.classList.add("computer-board")
-
     option[0].board.ocean.map((row, rowIndex) => {
         row.map((col, colIndex) => {
             const colCell = document.createElement("button");
@@ -44,7 +38,7 @@ const createBoard = (option) => {
     });
 };
 
-export default function createGame(option, div, button) {
+export default function createGame(option, div) {
     // form
     const container = div;
     // const placeShipBtn = button;
@@ -73,7 +67,6 @@ export default function createGame(option, div, button) {
             changeName.name = name.value;
         };
         
-        // console.log( name.value , option[0].name)
         p1Name.textContent = `Commander ${option[0].name}`;
         p2Name.textContent = `Commander ${option[1].name}`;
 
@@ -86,16 +79,13 @@ export default function createGame(option, div, button) {
 
         container.appendChild(playerOneContainer);
         container.appendChild(playerTwoContainer);
-
-       
-        // updateScreen(option, container)
         
         formContainer.style.display = "none";
-        // placeShipBtn.style.display = "block";
+    
         container.style.display = "grid";
         
         createBoard(option);
-        // return true;
+        return true;
     });
     
     

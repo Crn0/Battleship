@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import CreateBoard from "../board/board";
 import CreatePlayer from "../player/player";
 import Helper from "../helper/helper";
