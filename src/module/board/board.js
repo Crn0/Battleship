@@ -1,4 +1,5 @@
 import Ship from "../ship/ship";
+import posAvailable from "../helper/helper";
 
 export default function GameBoard() {
     const ocean = Array.from({length: 10}, () => Array(10).fill(false));
@@ -15,27 +16,9 @@ export default function GameBoard() {
         return ship;
     }; 
 
-    const posAvailable = (ship, row, col, dir, board) => {
-        const array = [];
-    
-        for (let i = 0; i < ship.length; i += 1) {
-            if(dir === "horizontal") {
-                if(col + i > 9)  return false;
-                array.push(board[row][col + i]);
-            };
-    
-            if(dir === "vertical") {
-                if(row + i > 9)  return false;
-                array.push(board[row + i][col]);
-            };
-            
-        };
-    
-        return array.every((cell) => cell === false);
-    };
-
-    const placeShip = (ship, row, col, dir, oceanBoard = ocean) => {
+    const placeShip = (vessel, row, col, dir, oceanBoard = ocean) => {
         const board = oceanBoard;
+        const ship = vessel
 
         if(posAvailable(ship, row, col, dir, board)) {
             for (let i = 0; i < ship.length; i += 1) {
@@ -81,13 +64,12 @@ export default function GameBoard() {
     };
 
     return Object.freeze({
-        get board() { return ocean},
+        get ocean() { return ocean},
         get shipAttacks() { return shipAttacks},
         get dock() { return dock},
         createShip,
         placeShip,
         receivedAtk,
         shipWrecks,
-        posAvailable
     });
 };
