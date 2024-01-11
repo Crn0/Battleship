@@ -44,7 +44,7 @@ export default function Game() {
     };
 
     const humanInput = async (row, col) => {
-        await wait(1000)
+        await wait(1)
         players[0].atkEnemy(row, col);
         switchPlayer()
         return true;
@@ -52,7 +52,7 @@ export default function Game() {
 
     const computerInput = async () => {
         if(isSunkAll()) return false;
-        await wait(3000);
+        await wait(1);
         players[1].atkEnemy();
         switchPlayer()
         return true

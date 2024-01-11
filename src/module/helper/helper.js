@@ -25,13 +25,12 @@ export default function Helper() {
 
     const legalMoves = (ocean) => {
         const legalAttacks = [];
-        for (let i = 0; i < ocean.shipAttacks.length; i += 1) {
-            for (let j = 0; j < ocean.shipAttacks[i].length; j += 1) {
-                if(ocean.shipAttacks[i][j] === false) {
-                    legalAttacks.push([i,j]);
-                };
-            };
-        }; 
+     
+        ocean.shipAttacks.forEach((row, rowIndex) => {
+            row.forEach((col, colIndex) => {
+                legalAttacks.push([rowIndex, colIndex])
+            });
+        });
 
         return legalAttacks;
     };

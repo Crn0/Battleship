@@ -6,8 +6,8 @@ const createBoard = (option) => {
     const boardOneContainer = document.querySelector(".human-board");
     const boardTwoContainer = document.querySelector(".computer-board");
 
-    option[0].board.ocean.map((row, rowIndex) => {
-        row.map((col, colIndex) => {
+    option[0].board.ocean.forEach((row, rowIndex) => {
+        row.forEach((col, colIndex) => {
             const colCell = document.createElement("button");
 
             colCell.className = "cell";
@@ -16,14 +16,14 @@ const createBoard = (option) => {
             colCell.classList.add("cell-human");
             colCell.classList.add("drop-target")
            
-            return boardOneContainer.appendChild(colCell)
+            boardOneContainer.appendChild(colCell)
         });
 
-        return playerOneContainer.appendChild(boardOneContainer);
+        playerOneContainer.appendChild(boardOneContainer);
     });
     
-    option[1].board.ocean.map((row, rowIndex) => {
-        row.map((col, colIndex) => {
+    option[1].board.ocean.forEach((row, rowIndex) => {
+        row.forEach((col, colIndex) => {
             const colCell = document.createElement("button");
             colCell.className = "cell";
 
@@ -31,10 +31,10 @@ const createBoard = (option) => {
             colCell.setAttribute("data-col", colIndex);
             colCell.classList.add("cell-computer");
         
-            return boardTwoContainer.appendChild(colCell)
+            boardTwoContainer.appendChild(colCell)
         });
       
-        return playerTwoContainer.appendChild(boardTwoContainer);
+        playerTwoContainer.appendChild(boardTwoContainer);
     });
 };
 

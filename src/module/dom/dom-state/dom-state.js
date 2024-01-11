@@ -14,46 +14,36 @@ const gameOver = (option) => {
 
 const updateScreen = (option) => {
     // human board
-    option[0].board.shipAttacks.map((row, rowIndex) => row.map((col, colIndex) => {
+    option[0].board.shipAttacks.forEach((row, rowIndex) => row.forEach((col, colIndex) => {
         if(col !== false) {
             const cell = document.querySelector(`.cell-human[data-row="${rowIndex}"][data-col="${colIndex}"]`)
             if(!cell.classList.contains("hit") && !cell.classList.contains("ship")) {
-                
+                cell.textContent = "miss";
                 cell.classList.add("hit");
             };
 
             if(cell.classList.contains("ship")) {
                 cell.textContent = "hit";
                 cell.classList.add("sink"); 
-                return cell;
             };
-
-            cell.textContent = "miss"
-
-            return cell;
         };
 
         return false;
     })); 
 
     // computer board
-    option[1].board.shipAttacks.map((row, rowIndex) => row.map((col, colIndex) => {
+    option[1].board.shipAttacks.forEach((row, rowIndex) => row.forEach((col, colIndex) => {
         if(col === true) {
             const cell = document.querySelector(`.cell-computer[data-row="${rowIndex}"][data-col="${colIndex}"]`)
             if(!cell.classList.contains("hit") && !cell.classList.contains("ship-computer")) {
-                
                 cell.classList.add("hit");
-                cell.textContent = "miss"
-                return cell
+                cell.textContent = "miss";
             };
 
             if(cell.classList.contains("ship-computer")) {
                 cell.textContent = "sink";
-                cell.classList.add("sink")
-                return cell;
-            };
-
-            return true;
+                cell.classList.add("sink");
+          };
         };
 
         return false;

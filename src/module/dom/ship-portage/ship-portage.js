@@ -1,32 +1,22 @@
 import Helper from "../../helper/helper";
 
 const renderShips = (option) => {
-    option[0].board.ocean.map((row, rowIndex) => {
-        row.map((col, colIndex) => {
+    option[0].board.ocean.forEach((row, rowIndex) => {
+        row.forEach((col, colIndex) => {
             const ship = document.querySelector(`.cell-human[data-row="${rowIndex}"][data-col="${colIndex}"]`);
             if(col !== false) {
                 ship.classList.add("ship");
-            
-            
             };
-            return null;
         });
-
-        return null;
     });
     
-    option[1].board.ocean.map((row, rowIndex) => {
-        row.map((col, colIndex) => {
+    option[1].board.ocean.forEach((row, rowIndex) => {
+        row.forEach((col, colIndex) => {
             const ship = document.querySelector(`.cell-computer[data-row="${rowIndex}"][data-col="${colIndex}"]`);
             if(col !== false) {
                 ship.classList.add("ship-computer");
-            }
-           
-
-            return null;
+            };
         });
-      
-        return null;
     });
 };
 
@@ -74,7 +64,7 @@ export default function placeShip(option, button) {
 
             parent.classList.add("horizontal-dock");
         
-            Array.from(child).map((val, index) => {
+            Array.from(child).forEach((val, index) => {
                 if(typeof val.classList === "undefined") return false;
                 if(val.classList.contains(horizontalPos[index])) return false;
             
@@ -89,7 +79,7 @@ export default function placeShip(option, button) {
 
             parent.classList.remove("horizontal-dock");
        
-            Array.from(child).map((val, index) => {
+            Array.from(child).forEach((val, index) => {
                 if(typeof val.classList === "undefined") return false;
                 if(!val.classList.contains(horizontalPos[index])) return false;
             
