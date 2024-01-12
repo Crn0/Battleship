@@ -54,7 +54,6 @@ export default function placeShip(option, button) {
             "carrier-horizontal-height",
             "battleship-horizontal-height",
             "cruiser-submarine-horizontal-height",
-            "cruiser-submarine-horizontal-height",
             "destroyer-horizontal-height"
         ];
    
@@ -63,14 +62,33 @@ export default function placeShip(option, button) {
             parent.classList.remove("vertical-dock");
 
             parent.classList.add("horizontal-dock");
-        
-            Array.from(child).forEach((val, index) => {
-                if(typeof val.classList === "undefined") return false;
-                if(val.classList.contains(horizontalPos[index])) return false;
-            
-                return child[index].classList.add(horizontalPos[index]);
-            });
 
+            const queue = [...child]
+
+            while(queue.length !== 0) {
+                const current = queue[0];
+
+                if(current.dataset.name === "carrier") {
+                    queue.shift();
+                    current.classList.add(horizontalPos[0])
+                };
+
+                if(current.dataset.name === "battleship") {
+                    queue.shift();
+                    current.classList.add(horizontalPos[1])
+                };
+
+                if(current.dataset.name === "cruiser" || current.dataset.name === "submarine") {
+                    queue.shift();
+                    current.classList.add(horizontalPos[2])
+                };
+
+                if(current.dataset.name === "destroyer") {
+                    queue.shift();
+                    current.classList.add(horizontalPos[3])
+                };
+            };
+        
             return true;
         };
 
@@ -78,14 +96,33 @@ export default function placeShip(option, button) {
             parent.classList.add("vertical-dock");
 
             parent.classList.remove("horizontal-dock");
-       
-            Array.from(child).forEach((val, index) => {
-                if(typeof val.classList === "undefined") return false;
-                if(!val.classList.contains(horizontalPos[index])) return false;
+
+            const queue = [...child];
+
+            while(queue.length !== 0) {
+                const current = queue[0];
             
-                return child[index].classList.remove(horizontalPos[index]);
-            });
-                
+                if(current.dataset.name === "carrier") {
+                    queue.shift();
+                    current.classList.remove(horizontalPos[0])
+                };
+
+                if(current.dataset.name === "battleship") {
+                    queue.shift();
+                    current.classList.remove(horizontalPos[1])
+                };
+
+                if(current.dataset.name === "cruiser" || current.dataset.name === "submarine") {
+                    queue.shift();
+                    current.classList.remove(horizontalPos[2])
+                };
+
+                if(current.dataset.name === "destroyer") {
+                    queue.shift();
+                    current.classList.remove(horizontalPos[3])
+                };
+            };
+
             return true;
         };
 
