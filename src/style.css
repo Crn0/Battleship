@@ -34,7 +34,7 @@ form > button:hover, .place-ship:hover {
 } 
 
 .game-container {
-   display: grid;
+   display: none;
    grid-template-columns: 1fr 1fr 1fr;
    place-content: center;
    place-items: center;
@@ -42,9 +42,6 @@ form > button:hover, .place-ship:hover {
    
 }
 
-.game-container {
-    display: none;
-}
 
 .p1-container {
     grid-column: 1;
@@ -67,8 +64,7 @@ form > button:hover, .place-ship:hover {
     display: grid;
     width: 500px;
     height: 500px;
-    grid-template-columns: repeat(10, 1fr);
-    grid-template-rows: repeat(10, 1fr);
+    grid-template-columns: repeat(auto-fill, minmax(50px, 1fr));
 }
 
 .ship-placement{
