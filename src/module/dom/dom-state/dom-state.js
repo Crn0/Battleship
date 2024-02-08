@@ -1,5 +1,6 @@
 const gameOver = (option) => {
     const winContainer = document.querySelector(".winner");
+    const board = document.querySelector(".computer-board");
     if(!option.isSunkAll()) return false;
 
     const p = document.createElement("p");
@@ -8,6 +9,11 @@ const gameOver = (option) => {
     winner = option.getActivePlayer().name === option.players[0].name ? winner = option.players[1].name : winner = option.players[0].name;
     p.textContent = `Winner: ${winner}`;
 
+    board.childNodes.forEach((child) => {
+        const node = child
+        node.style.pointerEvents = "none"
+    })
+    board.style.pointerEvents = "none"
     winContainer.appendChild(p)
     return true;
 }; 
@@ -58,7 +64,7 @@ const playLogic = async (e,option) => {
         
         // let playerCreationDon = false;
     try {
-        if(option.isSunkAll()) return false;
+        if(option.isSunkAll()) return gameOver(option);
 
         if(row !== undefined && col !== undefined) {
             if(e.target.classList.contains("hit") || e.target.classList.contains("boards")) {
@@ -74,18 +80,18 @@ const playLogic = async (e,option) => {
                 child.style.pointerEvents = "none";
             });
        
-            await option.humanInput(+row, +col).then(() => {
-                updateScreen(option.players);
-            });
+            await option.humanInput(+row, +col)
 
             await option.computerInput().then(() => {
-                updateScreen(option.players);
+                // updateScreen(option.players);
                 // enable pointer
                 children.forEach((val) => {
                     const child = val;
                     child.style.pointerEvents = "auto";
                 });
             });
+
+            await updateScreen(option.players);
          
             return option;
         };
@@ -104,16 +110,7 @@ export default function DomState(option) {
     const board = document.querySelector(".computer-board");
 
     board.addEventListener("click", (e) => {
-        playLogic(e, option).then((data) => {
-            // check if game is over
-            
-            if(data === false || typeof data.isSunkAll !== "function") return null;
-
-            if(data.isSunkAll()) return gameOver(option);
-
-            // return otherwise
-            return null;
-        });
+        playLogic(e, option)
     });
 
     return true;
