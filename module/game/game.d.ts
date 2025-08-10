@@ -8,6 +8,7 @@ export interface IGame {
     switchPlayer(): IPlayer;
     playerOneInput(row?: number, col?: number): Promise<void>;
     playerTwoInput(row?: number, col?: number): Promise<void>;
+    gameStarted: boolean;
 }
 declare class Game implements IGame {
     private _isGameOver;
@@ -24,6 +25,7 @@ declare class Game implements IGame {
     switchPlayer(): IPlayer;
     playerOneInput(row?: number, col?: number): Promise<void>;
     playerTwoInput(row?: number, col?: number): Promise<void>;
+    get gameStarted(): boolean;
     get playerOne(): IPlayer;
     get playerTwo(): IPlayer;
     get currentPlayer(): IPlayer;
