@@ -7,7 +7,5 @@ const ctr = domController();
 
 const gameController = ctr.gameController;
 
-ctr.shipPlacement(gameController.playerOne, true);
+ctr.shipPlacement(gameController.playerOne, false);
 ctr.shipPlacement(gameController.playerTwo, true);
-
-ctr.domState;

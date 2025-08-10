@@ -8,7 +8,6 @@ import { createShipPlacement } from "./ship-portage";
 
 export const domController = (): {
   gameController: IGame;
-  domState: void;
   shipPlacement(player: IPlayer, random?: boolean): void;
 } => {
   const root = document.getElementById("root");
@@ -29,7 +28,10 @@ export const domController = (): {
 
   root.appendChild(gameContainer);
 
-  const domState = createDomState(gameController);
+  console.log(gameContainer);
+  console.log(root);
 
-  return { gameController, domState, shipPlacement };
+  createDomState(gameController);
+
+  return { gameController, shipPlacement };
 };

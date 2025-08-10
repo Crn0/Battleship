@@ -34,7 +34,7 @@ export const createShipPlacement =
 
     if (random) {
       player.autoPlaceShips();
-      showShips(player);
+
       return;
     }
 
