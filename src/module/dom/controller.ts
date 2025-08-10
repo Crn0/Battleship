@@ -28,9 +28,6 @@ export const domController = (): {
 
   root.appendChild(gameContainer);
 
-  console.log(gameContainer);
-  console.log(root);
-
   createDomState(gameController);
 
   return { gameController, shipPlacement };
