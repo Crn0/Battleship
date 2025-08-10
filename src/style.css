@@ -1,88 +1,89 @@
-*{
-    margin: 0;
-    padding: 0;
+* {
+  margin: 0;
+  padding: 0;
 }
 
-
 .form-container {
-    display: grid;
-    place-content: center;
-    justify-content: center;
-    margin-top: 20px;
+  display: grid;
+  place-content: center;
+  justify-content: center;
+  margin-top: 20px;
 }
 
 form {
-    height: 250px;
-    margin: 10px;
-    padding: 10px;
-    display: grid;
-    place-items: center;
-    text-align: center;
+  height: 250px;
+  margin: 10px;
+  padding: 10px;
+  display: grid;
+  place-items: center;
+  text-align: center;
 }
 
-form > button, .place-ship {
-    width: 4rem;
-    height: 2rem;
-    background-color: white;
-    color: black;
-    border: 1px solid red;
+form > button,
+.place-ship {
+  width: 4rem;
+  height: 2rem;
+  background-color: white;
+  color: black;
+  border: 1px solid red;
 }
 
-form > button:hover, .place-ship:hover {
-    background-color: red;
-    color: white;
-} 
-
-.game-container {
-   display: none;
-   grid-template-columns: 1fr 1fr 1fr;
-   place-content: center;
-   place-items: center;
-   margin-top: 10px;
-   
+form > button:hover,
+.place-ship:hover {
+  background-color: red;
+  color: white;
 }
 
+#game-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  place-content: center;
+  place-items: center;
+  margin-top: 10px;
+  gap: 5rem;
+}
 
 .p1-container {
-    grid-column: 1;
+  grid-column: 1;
 }
 
 .announcement {
-    grid-column: 2;
+  grid-column: 2;
 }
 
 .p2-container {
-    grid-column: 3;
+  grid-column: 3;
 }
 
-.p1-container, .p2-container {
-    display: grid;
-    gap: 10px;
+.p1-container,
+.p2-container {
+  display: grid;
+  gap: 10px;
 }
 
-.boards {
-    display: grid;
-    width: 500px;
-    height: 500px;
-    grid-template-columns: repeat(auto-fill, minmax(50px, 1fr));
+.oceans {
+  display: grid;
+  width: 500px;
+  height: 500px;
+  grid-template-columns: repeat(auto-fill, minmax(50px, 1fr));
 }
 
-.ship-placement{
-    display: flex;
-    justify-content: center;
-    gap: 10px;
+.ship-placement {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
 }
 
 .vertical-dock {
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    width: 100px;
-    gap: 10px;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  width: 100px;
+  gap: 10px;
 }
 
 .horizontal-dock {
-    display: grid;
-    gap: 10px;
+  display: grid;
+  gap: 10px;
 }
 
 /* .vertical-dock {
@@ -93,87 +94,85 @@ form > button:hover, .place-ship:hover {
 } */
 
 .battleship-vertical-height {
-    height: 199px;
-   
+  height: 199px;
 }
 
 .cruiser-submarine-vertical-height {
-    height: 150px;
-   
+  height: 150px;
 }
 
 .destroyer-vertical-height {
-    height: 100px;
+  height: 100px;
 }
 
 /*  */
 .carrier-horizontal-height {
-    display: flex;
-    width: auto;
-    height: 50px;
-    gap: 1.5px;
+  display: flex;
+  width: auto;
+  height: 50px;
+  gap: 1.5px;
 }
 
 .battleship-horizontal-height {
-    display: flex;
-    width: 190px;
-    height: 50px;
-    gap: 1.5px;
+  display: flex;
+  width: 190px;
+  height: 50px;
+  gap: 1.5px;
 }
 
 .cruiser-submarine-horizontal-height {
-    display: flex;
-    width: 150px;
-    height: 50px;
-    gap: 1.5px;
+  display: flex;
+  width: 150px;
+  height: 50px;
+  gap: 1.5px;
 }
 
 .destroyer-horizontal-height {
-    display: flex;
-    width: 100px;
-    height: 50px;
-    gap: 1.5px;
+  display: flex;
+  width: 100px;
+  height: 50px;
+  gap: 1.5px;
 }
 
-
 .shipment {
-    height: 50px;
-    width: 50px;
-    border: 1px solid black;
-    background: blue;
+  height: 50px;
+  width: 50px;
+  border: 1px solid black;
+  background: blue;
 }
 
 .shipment-valid {
-    background-color: green;
+  background-color: green;
 }
 
 .shipment-invalid {
-    background-color: red;
+  background-color: red;
 }
-
 
 .cell-computer {
-    pointer-events: none
+  pointer-events: none;
 }
 
-.cell-human, .cell-computer  {
-    /* background-color: aliceblue; */
-    background: thistle;
-    border: 1px solid white;
+.cell-human,
+.cell-computer {
+  /* background-color: aliceblue; */
+  background: thistle;
+  border: 1px solid white;
 }
 
-.hide-btn, .create-ship {
-    display: none;
+.hide-btn,
+.create-ship {
+  display: none;
 }
 
 .ship {
-    background-color: blue;
+  background-color: blue;
 }
 
 .hit {
-    background-color: blanchedalmond;
+  background-color: blanchedalmond;
 }
 
 .sink {
-    background-color: red;
+  background-color: red;
 }
