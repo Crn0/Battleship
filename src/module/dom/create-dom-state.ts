@@ -10,10 +10,14 @@ export const createDomState = (gameController: IGame) => {
   const playerOneOTwo = getOcean(gameController.playerTwo.id);
 
   playerOneOCean.addEventListener("click", (e) => {
+    if (!gameController.gameStarted) return;
+
     playLogic(e, gameController);
   });
 
   playerOneOTwo.addEventListener("click", (e) => {
+    if (!gameController.gameStarted) return;
+
     playLogic(e, gameController);
   });
 };

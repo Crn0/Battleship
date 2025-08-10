@@ -12,6 +12,7 @@ export interface IGame {
   switchPlayer(): IPlayer;
   playerOneInput(row?: number, col?: number): Promise<void>;
   playerTwoInput(row?: number, col?: number): Promise<void>;
+  gameStarted: boolean;
 }
 
 class Game implements IGame {
@@ -108,6 +109,13 @@ class Game implements IGame {
     }
 
     this.switchPlayer();
+  }
+
+  get gameStarted() {
+    return (
+      this._playerOne.board.dock.length === 0 &&
+      this._playerTwo.board.dock.length === 0
+    );
   }
 
   get playerOne() {
