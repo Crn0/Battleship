@@ -4,7 +4,7 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 module.exports = {
   mode: "development",
   devtool: "inline-source-map",
-  entry: "./src/index.js",
+  entry: "./src/index.ts",
   plugins: [
     new HtmlWebpackPlugin({
       title: "Battleship",
@@ -12,12 +12,16 @@ module.exports = {
     }),
   ],
   output: {
-    filename: "main.js",
+    filename: "main.ts",
     path: path.resolve(__dirname, "dist"),
     clean: true,
   },
   module: {
     rules: [
+      // All files with a '.ts' or '.tsx' extension will be handled by 'ts-loader'.
+      { test: /\.tsx?$/, loader: "ts-loader" },
+      // All output '.js' files will have any sourcemaps re-processed by 'source-map-loader'.
+      { test: /\.js$/, loader: "source-map-loader" },
       {
         test: /\.css$/i,
         use: ["style-loader", "css-loader"],
@@ -36,11 +40,9 @@ module.exports = {
         use: {
           loader: "babel-loader",
           options: {
-            presets: [
-              ["@babel/preset-env", { targets: "defaults" }]
-            ]
-          }
-        }
+            presets: [["@babel/preset-env", { targets: "defaults" }]],
+          },
+        },
       },
     ],
   },
@@ -49,7 +51,7 @@ module.exports = {
       config$: "./configs/app-config.js",
       react: "./vendor/react-master",
     },
-    extensions: [".js", ".jsx"],
+    extensions: [".js", ".ts", ".jsx"],
     modules: [
       "node_modules",
       "bower_components",
